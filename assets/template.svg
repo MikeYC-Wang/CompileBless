@@ -63,9 +63,9 @@
 
   <!-- ========================= 計數看板 ========================= -->
   <g>
-    <rect x="277" y="-202" width="430" height="54" rx="8" fill="url(#sky)" stroke="#f1c40f" stroke-width="3"/>
-    <text x="492" y="-176" text-anchor="middle" class="pix" font-size="19" fill="#e8d8ff">今日全球工程師已累積功德</text>
-    <text x="492" y="-153" text-anchor="middle" class="pix2 glow" font-size="24" fill="#ffd24d">✦ {merit_count} ✦</text>
+    <rect x="237" y="-206" width="500" height="66" rx="10" fill="url(#sky)" stroke="#f1c40f" stroke-width="4"/>
+    <text x="487" y="-178" text-anchor="middle" class="pix" font-size="27" fill="#e8d8ff">今日全球工程師已累積功德</text>
+    <text x="487" y="-149" text-anchor="middle" class="pix2 glow" font-size="38" fill="#ffd24d">✦ {merit_count} ✦</text>
   </g>
 
   <!-- ============================================================
@@ -120,11 +120,11 @@
   <!-- ============================================================
        +1 Merit / -1 Bug 飄字（功德箱上方，箱中心 ≈ x773）
        ============================================================ -->
-  <g transform="translate(773,-18)">
-    <text x="0" y="0" text-anchor="middle" class="pix2 float"    font-size="34" fill="#55e06a">+1 Merit</text>
-    <text x="0" y="0" text-anchor="middle" class="pix2 float f2" font-size="34" fill="#8be69a">-1 Bug</text>
+  <g transform="translate(773,-24)">
+    <text x="0" y="0" text-anchor="middle" class="pix2 float"    font-size="44" fill="#55e06a">+1 Merit</text>
+    <text x="0" y="0" text-anchor="middle" class="pix2 float f2" font-size="44" fill="#8be69a">-1 Bug</text>
   </g>
 
   <!-- ========================= 底部題字 ========================= -->
-  <text x="487" y="548" text-anchor="middle" class="pix" font-size="17" fill="#7a5cff">{blessed_line}</text>
+  <text x="487" y="548" text-anchor="middle" class="pix" font-size="23" fill="#7a5cff">{blessed_line}</text>
 </svg>
