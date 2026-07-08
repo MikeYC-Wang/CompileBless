@@ -115,6 +115,12 @@ HTML 置中按鈕：
 4. 把上面的超連結與 `<img src="./compile_bless.svg">` 貼進你的 README，並把 `MikeYC-Wang/CompileBless` 換成你自己的 `<擁有者>/<專案>`。
 5. 完成！之後每個符合標題規則的 Issue 都會自動點香、關閉並蓋上 `status: blessed`。
 
+> 📌 **要在「別的 repo」（例如個人 profile README）顯示時**，不能用相對路徑，也**別用 `raw.githubusercontent.com`（大檔易觸發 429 Too Many Requests）**。請改用 jsDelivr CDN：
+> ```markdown
+> <img src="https://cdn.jsdelivr.net/gh/MikeYC-Wang/CompileBless@main/compile_bless.svg" width="500">
+> ```
+> 本專案的工作流會在每次 +1 後自動呼叫 `purge.jsdelivr.net` 清除 CDN 快取，讓計數即時更新。
+
 ---
 
 ## 🎨 動態特效說明
