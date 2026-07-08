@@ -1,0 +1,81 @@
+name: CompileBless 點香積功德
+
+# 當有人開新 Issue 就檢查，是不是來點香的信徒
+on:
+  issues:
+    types: [opened]
+
+# 用 concurrency 把所有點香請求排隊，一次只跑一個，
+# 從源頭避免多人同時 push 造成的 Git 衝突。
+concurrency:
+  group: compile-bless-merit
+  cancel-in-progress: false
+
+# 推回代碼要 contents:write，關閉 Issue / 加標籤要 issues:write
+permissions:
+  contents: write
+  issues: write
+
+jobs:
+  bless:
+    # 只有標題以「CompileBless: 功德 +1」開頭的 Issue 才辦理
+    if: startsWith(github.event.issue.title, 'CompileBless: 功德 +1')
+    runs-on: ubuntu-latest
+    steps:
+      - name: 🛎️ 簽出代碼
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: 🐍 設定 Python 環境
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: 🔥 點香 +1（執行核心腳本）
+        env:
+          BLESS_ACTOR: ${{ github.event.issue.user.login }}
+        run: python scripts/update_merit.py
+
+      - name: 🤖 設定 GitHub Actions Bot 帳號
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+      - name: 📤 提交並安全推回變更
+        run: |
+          if git diff --quiet -- data/merit.json compile_bless.svg; then
+            echo "沒有任何變更，跳過提交。"
+            exit 0
+          fi
+          git add data/merit.json compile_bless.svg
+          git commit -m "chore(merit): bless +1 by @${{ github.event.issue.user.login }} (issue #${{ github.event.issue.number }})"
+          # 面對可能的並行衝突，最多重試 5 次 rebase + push
+          n=0
+          until [ "$n" -ge 5 ]; do
+            if git push origin HEAD:${{ github.event.repository.default_branch }}; then
+              echo "推送成功。"
+              break
+            fi
+            n=$((n+1))
+            echo "推送失敗，第 $n 次重試，先 rebase 最新內容…"
+            git pull --rebase --autostash origin ${{ github.event.repository.default_branch }}
+            sleep 3
+          done
+          if [ "$n" -ge 5 ]; then
+            echo "::error::多次重試後仍無法推送，放棄。"
+            exit 1
+          fi
+
+      - name: 🙏 關閉 Issue 並蓋上「status: blessed」神印
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # 確保標籤存在（不存在就建立，存在則更新顏色）
+          gh label create "status: blessed" \
+            --color "8A2BE2" \
+            --description "神明已辦理完畢，功德已入帳" \
+            --force
+          gh issue edit "${{ github.event.issue.number }}" --add-label "status: blessed"
+          gh issue comment "${{ github.event.issue.number }}" --body "🕯️ 香火已收到，功德 +1，Bug -1。願您 build 常綠、pipeline 常青。此 Issue 已由神明自動辦結。"
+          gh issue close "${{ github.event.issue.number }}" --reason completed
