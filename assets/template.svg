@@ -1,0 +1,168 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 450 250" width="450" height="250"
+     shape-rendering="crispEdges" font-family="'Courier New',ui-monospace,monospace">
+  <!-- =============================================================
+       CompileBless · 賽博點香積功德 · 3D 等角投影像素模板
+       佔位符：{merit_count} {blessed_line} {blessed_by} {blessed_at}
+       ============================================================= -->
+  <defs>
+    <linearGradient id="bronze" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#c79a4f"/>
+      <stop offset="0.5" stop-color="#9c7332"/>
+      <stop offset="1" stop-color="#6e4d1d"/>
+    </linearGradient>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2a1a4a"/>
+      <stop offset="1" stop-color="#160c2c"/>
+    </linearGradient>
+    <radialGradient id="ember" cx="0.5" cy="0.4" r="0.6">
+      <stop offset="0" stop-color="#fff2b0"/>
+      <stop offset="0.5" stop-color="#ff8c2b"/>
+      <stop offset="1" stop-color="#c23b0e"/>
+    </radialGradient>
+
+    <style>
+      /* ---- 線香煙霧：整條上升淡出 + 內層左右擺動 ---- */
+      @keyframes rise {
+        0%   { transform: translateY(0);     opacity: 0.75; }
+        100% { transform: translateY(-52px); opacity: 0;    }
+      }
+      @keyframes sway {
+        0%   { transform: translateX(-2.5px); }
+        50%  { transform: translateX(2.5px);  }
+        100% { transform: translateX(-2.5px); }
+      }
+      /* ---- 火星忽明忽暗 ---- */
+      @keyframes ember {
+        0%, 100% { opacity: 1;    }
+        50%      { opacity: 0.45; }
+      }
+      /* ---- 功德飄字：往天空飄升並淡出 ---- */
+      @keyframes floatUp {
+        0%   { transform: translateY(0);     opacity: 0;   }
+        12%  { opacity: 1;   }
+        80%  { opacity: 0.9; }
+        100% { transform: translateY(-46px); opacity: 0;   }
+      }
+      /* ---- 看板數字微微呼吸發光 ---- */
+      @keyframes glow {
+        0%, 100% { opacity: 1;   }
+        50%      { opacity: 0.7; }
+      }
+
+      .rise  { animation: rise 4s linear infinite; }
+      .sway  { animation: sway 2.2s ease-in-out infinite; }
+      .s2    { animation-delay: 1.3s; }
+      .s3    { animation-delay: 2.6s; }
+      .ember { animation: ember 0.9s ease-in-out infinite; }
+      .float { animation: floatUp 4s ease-out infinite; }
+      .f2    { animation-delay: 2s; }
+      .glow  { animation: glow 2.4s ease-in-out infinite; }
+
+      .pix  { font-weight: bold; letter-spacing: 1px; }
+      .pix2 { font-weight: bold; letter-spacing: 2px; }
+    </style>
+  </defs>
+
+  <!-- ========================= 計數看板 ========================= -->
+  <g>
+    <rect x="24" y="8" width="402" height="34" rx="4" fill="url(#sky)" stroke="#f1c40f" stroke-width="2"/>
+    <rect x="24" y="8" width="402" height="34" rx="4" fill="none" stroke="#7a5cff" stroke-width="1" opacity="0.5"/>
+    <text x="225" y="24" text-anchor="middle" class="pix" font-size="11" fill="#e8d8ff">今日全球工程師已累積功德</text>
+    <text x="225" y="38" text-anchor="middle" class="pix2 glow" font-size="15" fill="#ffd24d">✦ {merit_count} ✦</text>
+  </g>
+
+  <!-- ========================= 左側 · 天公爐 ========================= -->
+  <g>
+    <!-- 香煙（3 條，錯開時間） -->
+    <g transform="translate(104,112)">
+      <g class="rise"><g class="sway">
+        <rect x="-2" y="-4"  width="4" height="4" fill="#c9c9c9"/>
+        <rect x="0"  y="-9"  width="4" height="4" fill="#bcbcbc"/>
+        <rect x="-3" y="-14" width="4" height="4" fill="#b0b0b0"/>
+        <rect x="0"  y="-19" width="4" height="4" fill="#a6a6a6"/>
+      </g></g>
+    </g>
+    <g transform="translate(118,110)">
+      <g class="rise s2"><g class="sway">
+        <rect x="-2" y="-4"  width="4" height="4" fill="#cccccc"/>
+        <rect x="1"  y="-9"  width="4" height="4" fill="#bfbfbf"/>
+        <rect x="-3" y="-14" width="4" height="4" fill="#b2b2b2"/>
+        <rect x="1"  y="-19" width="4" height="4" fill="#a8a8a8"/>
+      </g></g>
+    </g>
+    <g transform="translate(132,112)">
+      <g class="rise s3"><g class="sway">
+        <rect x="-2" y="-4"  width="4" height="4" fill="#c9c9c9"/>
+        <rect x="-1" y="-9"  width="4" height="4" fill="#bcbcbc"/>
+        <rect x="2"  y="-14" width="4" height="4" fill="#b0b0b0"/>
+        <rect x="-1" y="-19" width="4" height="4" fill="#a6a6a6"/>
+      </g></g>
+    </g>
+
+    <!-- 線香（暗紅像素長條 + 火星） -->
+    <g>
+      <rect x="102" y="118" width="4" height="42" fill="#7f2b2b"/>
+      <rect x="102" y="118" width="2" height="42" fill="#9e3a3a"/>
+      <rect x="116" y="114" width="4" height="46" fill="#7f2b2b"/>
+      <rect x="116" y="114" width="2" height="46" fill="#9e3a3a"/>
+      <rect x="130" y="118" width="4" height="42" fill="#7f2b2b"/>
+      <rect x="130" y="118" width="2" height="42" fill="#9e3a3a"/>
+      <!-- 火星 -->
+      <rect x="101" y="114" width="6" height="6" fill="url(#ember)" class="ember" rx="1"/>
+      <rect x="115" y="110" width="6" height="6" fill="url(#ember)" class="ember s2" rx="1"/>
+      <rect x="129" y="114" width="6" height="6" fill="url(#ember)" class="ember s3" rx="1"/>
+    </g>
+
+    <!-- 爐身：多層扁平 3D 像素方塊疊加（等角投影） -->
+    <!-- 爐座（底盤） -->
+    <polygon points="96,196 140,196 134,206 102,206" fill="#5e3f18"/>
+    <!-- 爐身梯形 -->
+    <polygon points="70,158 166,158 146,196 90,196" fill="url(#bronze)"/>
+    <polygon points="70,158 118,178 118,196 90,196" fill="#7a5520" opacity="0.55"/>
+    <!-- 爐口環（等角頂面） -->
+    <polygon points="118,138 168,158 118,178 68,158" fill="#caa15a"/>
+    <polygon points="118,138 168,158 118,178 68,158" fill="none" stroke="#e8c880" stroke-width="1.5"/>
+    <!-- 爐內灰（暗色開口） -->
+    <polygon points="118,148 150,158 118,168 86,158" fill="#2e2620"/>
+    <!-- 兩側耳把 -->
+    <rect x="58" y="150" width="10" height="8" fill="#9c7332"/>
+    <rect x="58" y="150" width="10" height="3" fill="#c79a4f"/>
+    <rect x="168" y="150" width="10" height="8" fill="#9c7332"/>
+    <rect x="168" y="150" width="10" height="3" fill="#c79a4f"/>
+  </g>
+
+  <!-- ========================= 右側 · 功德箱 ========================= -->
+  <g>
+    <!-- 功德飄字（+1 Merit / -1 Bug 交替飄升） -->
+    <g transform="translate(345,120)">
+      <text x="0" y="0" text-anchor="middle" class="pix float" font-size="12" fill="#55e06a">+1 Merit</text>
+      <text x="0" y="0" text-anchor="middle" class="pix float f2" font-size="12" fill="#86efac">-1 Bug</text>
+    </g>
+
+    <!-- 立體硃砂紅木箱（等角立方體） -->
+    <!-- 右前面（受光面） -->
+    <polygon points="345,158 385,138 385,188 345,208" fill="#b23325"/>
+    <!-- 左前面（背光面） -->
+    <polygon points="305,138 345,158 345,208 305,188" fill="#8f271d"/>
+    <!-- 頂面 -->
+    <polygon points="345,118 385,138 345,158 305,138" fill="#d24a3a"/>
+    <!-- 頂面金邊 + 投錢口 -->
+    <polygon points="345,118 385,138 345,158 305,138" fill="none" stroke="#ffcf33" stroke-width="1.5"/>
+    <polygon points="345,130 361,138 345,146 329,138" fill="#2a0f0b"/>
+    <!-- 稜線金邊 -->
+    <line x1="345" y1="158" x2="345" y2="208" stroke="#ffcf33" stroke-width="1.5" opacity="0.8"/>
+    <!-- 正面「功德箱」黃色像素字（沿右前面直排） -->
+    <g fill="#ffcf33" class="pix2" font-size="13" text-anchor="middle">
+      <text x="365" y="166">功</text>
+      <text x="365" y="181">德</text>
+      <text x="365" y="196">箱</text>
+    </g>
+    <!-- 箱面鉚釘裝飾 -->
+    <rect x="312" y="150" width="3" height="3" fill="#ffcf33" opacity="0.7"/>
+    <rect x="312" y="180" width="3" height="3" fill="#ffcf33" opacity="0.7"/>
+  </g>
+
+  <!-- ========================= 底部題字 ========================= -->
+  <text x="225" y="234" text-anchor="middle" class="pix" font-size="9" fill="#b6a8d8">{blessed_line}</text>
+  <text x="225" y="246" text-anchor="middle" font-size="8" fill="#6a5c8a">CompileBless · may your build be green · {blessed_at}</text>
+</svg>
