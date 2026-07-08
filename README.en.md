@@ -146,4 +146,4 @@ Centered HTML button:
 
 ## 📜 License
 
-Open source — fork it, light the incense, join in. May your `git push` be all green.
+Licensed under the [MIT License](LICENSE). Fork it, light the incense, join in. May your `git push` be all green.

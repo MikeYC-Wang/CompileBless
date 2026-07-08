@@ -144,4 +144,4 @@ HTML 置中按鈕：
 
 ## 📜 授權
 
-開源專案，歡迎 Fork、點香、共襄盛舉。願您 `git push` 一路綠燈。
+本專案採用 [MIT License](LICENSE) 授權。歡迎 Fork、點香、共襄盛舉。願您 `git push` 一路綠燈。
