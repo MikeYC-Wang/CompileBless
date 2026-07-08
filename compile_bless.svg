@@ -1,14 +1,44 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 450 250" width="450" height="250"
-     shape-rendering="crispEdges" font-family="'Courier New',ui-monospace,monospace">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 460 260" width="460" height="260"
+     shape-rendering="geometricPrecision" font-family="'Courier New',ui-monospace,monospace">
   <!-- =============================================================
-       CompileBless · 賽博點香積功德 · 3D 等角投影像素模板
-       佔位符：0 ???? Bug anonymous genesis
+       CompileBless · 賽博點香積功德 · 3D 體素（天官賜福爐 / CODE MERIT 箱）
+       佔位符：0 ???? Bug anonymous preview
        ============================================================= -->
   <defs>
-    <linearGradient id="bronze" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#c79a4f"/>
-      <stop offset="0.5" stop-color="#9c7332"/>
-      <stop offset="1" stop-color="#6e4d1d"/>
+    <!-- 青銅漸層 -->
+    <linearGradient id="bronzeTop" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#d8b063"/>
+      <stop offset="1" stop-color="#a67c33"/>
+    </linearGradient>
+    <linearGradient id="bronzeBody" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#c49647"/>
+      <stop offset="0.55" stop-color="#9c7330"/>
+      <stop offset="1" stop-color="#5f4318"/>
+    </linearGradient>
+    <linearGradient id="bronzeDark" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#8a6528"/>
+      <stop offset="1" stop-color="#4a340f"/>
+    </linearGradient>
+    <radialGradient id="ashBed" cx="0.5" cy="0.42" r="0.6">
+      <stop offset="0" stop-color="#e6d7ad"/>
+      <stop offset="1" stop-color="#b09a68"/>
+    </radialGradient>
+    <!-- 紅木漸層 -->
+    <linearGradient id="woodTop" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#d94b39"/>
+      <stop offset="1" stop-color="#b23625"/>
+    </linearGradient>
+    <linearGradient id="woodR" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#bd3a29"/>
+      <stop offset="1" stop-color="#7c1e14"/>
+    </linearGradient>
+    <linearGradient id="woodL" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#8f271b"/>
+      <stop offset="1" stop-color="#551109"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffe08a"/>
+      <stop offset="1" stop-color="#d19a1e"/>
     </linearGradient>
     <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
       <stop offset="0" stop-color="#2a1a4a"/>
@@ -19,150 +49,242 @@
       <stop offset="0.5" stop-color="#ff8c2b"/>
       <stop offset="1" stop-color="#c23b0e"/>
     </radialGradient>
+    <radialGradient id="glowPanel" cx="0.5" cy="0.5" r="0.7">
+      <stop offset="0" stop-color="#a03526"/>
+      <stop offset="1" stop-color="#6d150c"/>
+    </radialGradient>
 
     <style>
-      /* ---- 線香煙霧：整條上升淡出 + 內層左右擺動 ---- */
       @keyframes rise {
-        0%   { transform: translateY(0);     opacity: 0.75; }
-        100% { transform: translateY(-52px); opacity: 0;    }
+        0%   { transform: translateY(0);     opacity: 0.8; }
+        100% { transform: translateY(-58px); opacity: 0;   }
       }
       @keyframes sway {
-        0%   { transform: translateX(-2.5px); }
-        50%  { transform: translateX(2.5px);  }
-        100% { transform: translateX(-2.5px); }
+        0%   { transform: translateX(-3px); }
+        50%  { transform: translateX(3px);  }
+        100% { transform: translateX(-3px); }
       }
-      /* ---- 火星忽明忽暗 ---- */
       @keyframes ember {
         0%, 100% { opacity: 1;    }
-        50%      { opacity: 0.45; }
+        50%      { opacity: 0.4;  }
       }
-      /* ---- 功德飄字：往天空飄升並淡出 ---- */
       @keyframes floatUp {
         0%   { transform: translateY(0);     opacity: 0;   }
         12%  { opacity: 1;   }
         80%  { opacity: 0.9; }
-        100% { transform: translateY(-46px); opacity: 0;   }
+        100% { transform: translateY(-50px); opacity: 0;   }
       }
-      /* ---- 看板數字微微呼吸發光 ---- */
       @keyframes glow {
         0%, 100% { opacity: 1;   }
         50%      { opacity: 0.7; }
       }
-
-      .rise  { animation: rise 4s linear infinite; }
-      .sway  { animation: sway 2.2s ease-in-out infinite; }
-      .s2    { animation-delay: 1.3s; }
-      .s3    { animation-delay: 2.6s; }
+      .rise  { animation: rise 4.2s linear infinite; }
+      .sway  { animation: sway 2.4s ease-in-out infinite; }
+      .s2    { animation-delay: 1.4s; }
+      .s3    { animation-delay: 2.8s; }
       .ember { animation: ember 0.9s ease-in-out infinite; }
       .float { animation: floatUp 4s ease-out infinite; }
       .f2    { animation-delay: 2s; }
       .glow  { animation: glow 2.4s ease-in-out infinite; }
-
-      .pix  { font-weight: bold; letter-spacing: 1px; }
-      .pix2 { font-weight: bold; letter-spacing: 2px; }
+      .pix   { font-weight: bold; letter-spacing: 1px; }
+      .pix2  { font-weight: bold; letter-spacing: 2px; }
     </style>
   </defs>
 
   <!-- ========================= 計數看板 ========================= -->
   <g>
-    <rect x="24" y="8" width="402" height="34" rx="4" fill="url(#sky)" stroke="#f1c40f" stroke-width="2"/>
-    <rect x="24" y="8" width="402" height="34" rx="4" fill="none" stroke="#7a5cff" stroke-width="1" opacity="0.5"/>
-    <text x="225" y="24" text-anchor="middle" class="pix" font-size="11" fill="#e8d8ff">今日全球工程師已累積功德</text>
-    <text x="225" y="38" text-anchor="middle" class="pix2 glow" font-size="15" fill="#ffd24d">✦ 0 ✦</text>
+    <rect x="26" y="6" width="408" height="34" rx="4" fill="url(#sky)" stroke="#f1c40f" stroke-width="2"/>
+    <rect x="26" y="6" width="408" height="34" rx="4" fill="none" stroke="#7a5cff" stroke-width="1" opacity="0.5"/>
+    <text x="230" y="22" text-anchor="middle" class="pix" font-size="11" fill="#e8d8ff">今日全球工程師已累積功德</text>
+    <text x="230" y="36" text-anchor="middle" class="pix2 glow" font-size="15" fill="#ffd24d">✦ 0 ✦</text>
   </g>
 
-  <!-- ========================= 左側 · 天公爐 ========================= -->
+  <!-- ============================================================
+       左側 · 天官賜福 青銅龍腳香爐
+       ============================================================ -->
   <g>
     <!-- 香煙（3 條，錯開時間） -->
-    <g transform="translate(104,112)">
+    <g transform="translate(96,86)">
       <g class="rise"><g class="sway">
-        <rect x="-2" y="-4"  width="4" height="4" fill="#c9c9c9"/>
-        <rect x="0"  y="-9"  width="4" height="4" fill="#bcbcbc"/>
-        <rect x="-3" y="-14" width="4" height="4" fill="#b0b0b0"/>
-        <rect x="0"  y="-19" width="4" height="4" fill="#a6a6a6"/>
+        <rect x="-2" y="-4"  width="5" height="5" fill="#d0d0d0"/>
+        <rect x="1"  y="-10" width="5" height="5" fill="#c2c2c2"/>
+        <rect x="-3" y="-16" width="5" height="5" fill="#b4b4b4"/>
+        <rect x="1"  y="-22" width="5" height="5" fill="#a8a8a8"/>
       </g></g>
     </g>
-    <g transform="translate(118,110)">
+    <g transform="translate(114,80)">
       <g class="rise s2"><g class="sway">
-        <rect x="-2" y="-4"  width="4" height="4" fill="#cccccc"/>
-        <rect x="1"  y="-9"  width="4" height="4" fill="#bfbfbf"/>
-        <rect x="-3" y="-14" width="4" height="4" fill="#b2b2b2"/>
-        <rect x="1"  y="-19" width="4" height="4" fill="#a8a8a8"/>
+        <rect x="-2" y="-4"  width="5" height="5" fill="#d4d4d4"/>
+        <rect x="2"  y="-10" width="5" height="5" fill="#c6c6c6"/>
+        <rect x="-3" y="-16" width="5" height="5" fill="#b6b6b6"/>
+        <rect x="2"  y="-22" width="5" height="5" fill="#aaaaaa"/>
       </g></g>
     </g>
-    <g transform="translate(132,112)">
+    <g transform="translate(132,86)">
       <g class="rise s3"><g class="sway">
-        <rect x="-2" y="-4"  width="4" height="4" fill="#c9c9c9"/>
-        <rect x="-1" y="-9"  width="4" height="4" fill="#bcbcbc"/>
-        <rect x="2"  y="-14" width="4" height="4" fill="#b0b0b0"/>
-        <rect x="-1" y="-19" width="4" height="4" fill="#a6a6a6"/>
+        <rect x="-2" y="-4"  width="5" height="5" fill="#d0d0d0"/>
+        <rect x="-1" y="-10" width="5" height="5" fill="#c2c2c2"/>
+        <rect x="2"  y="-16" width="5" height="5" fill="#b4b4b4"/>
+        <rect x="-1" y="-22" width="5" height="5" fill="#a8a8a8"/>
       </g></g>
     </g>
 
-    <!-- 線香（暗紅像素長條 + 火星） -->
+    <!-- 線香（暗紅長條 + 焦黑頂 + 火星） -->
     <g>
-      <rect x="102" y="118" width="4" height="42" fill="#7f2b2b"/>
-      <rect x="102" y="118" width="2" height="42" fill="#9e3a3a"/>
-      <rect x="116" y="114" width="4" height="46" fill="#7f2b2b"/>
-      <rect x="116" y="114" width="2" height="46" fill="#9e3a3a"/>
-      <rect x="130" y="118" width="4" height="42" fill="#7f2b2b"/>
-      <rect x="130" y="118" width="2" height="42" fill="#9e3a3a"/>
+      <rect x="93"  y="92" width="5" height="56" fill="#6f2020"/>
+      <rect x="93"  y="92" width="2" height="56" fill="#8f3232"/>
+      <rect x="111" y="86" width="5" height="62" fill="#6f2020"/>
+      <rect x="111" y="86" width="2" height="62" fill="#8f3232"/>
+      <rect x="129" y="92" width="5" height="56" fill="#6f2020"/>
+      <rect x="129" y="92" width="2" height="56" fill="#8f3232"/>
+      <!-- 焦黑燒過的頂端 -->
+      <rect x="93"  y="88" width="5" height="6" fill="#231414"/>
+      <rect x="111" y="82" width="5" height="6" fill="#231414"/>
+      <rect x="129" y="88" width="5" height="6" fill="#231414"/>
       <!-- 火星 -->
-      <rect x="101" y="114" width="6" height="6" fill="url(#ember)" class="ember" rx="1"/>
-      <rect x="115" y="110" width="6" height="6" fill="url(#ember)" class="ember s2" rx="1"/>
-      <rect x="129" y="114" width="6" height="6" fill="url(#ember)" class="ember s3" rx="1"/>
+      <rect x="92"  y="86" width="7" height="7" rx="1" fill="url(#ember)" class="ember"/>
+      <rect x="110" y="80" width="7" height="7" rx="1" fill="url(#ember)" class="ember s2"/>
+      <rect x="128" y="86" width="7" height="7" rx="1" fill="url(#ember)" class="ember s3"/>
     </g>
 
-    <!-- 爐身：多層扁平 3D 像素方塊疊加（等角投影） -->
-    <!-- 爐座（底盤） -->
-    <polygon points="96,196 140,196 134,206 102,206" fill="#5e3f18"/>
-    <!-- 爐身梯形 -->
-    <polygon points="70,158 166,158 146,196 90,196" fill="url(#bronze)"/>
-    <polygon points="70,158 118,178 118,196 90,196" fill="#7a5520" opacity="0.55"/>
+    <!-- 龍腳（三足） -->
+    <!-- 左後足 -->
+    <path d="M74,182 q-10,10 -6,26 l10,2 q-2,-14 8,-22 z" fill="url(#bronzeDark)"/>
+    <path d="M68,206 l14,3 2,8 -16,-2 z" fill="#6d4d1e"/>
+    <rect x="66" y="214" width="6" height="5" fill="#7d5820"/>
+    <rect x="74" y="215" width="6" height="5" fill="#7d5820"/>
+    <!-- 右後足 -->
+    <path d="M166,182 q10,10 6,26 l-10,2 q2,-14 -8,-22 z" fill="url(#bronzeDark)"/>
+    <path d="M158,206 l14,3 -2,8 -16,-2 z" fill="#6d4d1e"/>
+    <rect x="168" y="214" width="6" height="5" fill="#7d5820"/>
+    <rect x="160" y="215" width="6" height="5" fill="#7d5820"/>
+    <!-- 前中足 -->
+    <path d="M112,196 q-6,12 -4,26 l16,0 q2,-14 -4,-26 z" fill="url(#bronzeBody)"/>
+    <path d="M108,220 l24,0 0,8 -24,0 z" fill="#6d4d1e"/>
+    <rect x="106" y="226" width="7" height="6" fill="#8a6528"/>
+    <rect x="115" y="226" width="7" height="6" fill="#8a6528"/>
+    <rect x="124" y="226" width="7" height="6" fill="#8a6528"/>
+
+    <!-- 爐身（鼓腹） -->
+    <path d="M64,140
+             C58,158 60,182 92,196
+             L148,196
+             C180,182 182,158 176,140 Z" fill="url(#bronzeBody)"/>
+    <!-- 腹部左側受光 -->
+    <path d="M66,142 C61,158 64,180 92,194 L100,190 C80,178 78,158 82,144 Z"
+          fill="#d4a94f" opacity="0.45"/>
+    <!-- 腹部底部陰影 -->
+    <path d="M92,196 L148,196 C168,187 176,174 178,160 C172,182 150,192 120,192
+             C102,192 96,194 92,196 Z" fill="#4a340f" opacity="0.5"/>
+
+    <!-- 天官賜福 金色紋帶 -->
+    <path d="M66,150 C90,162 150,162 174,150 L174,168 C150,180 90,180 66,168 Z"
+          fill="#4a340f" opacity="0.85"/>
+    <text x="120" y="170" text-anchor="middle" class="pix2" font-size="12" fill="#ffd24d">天官賜福</text>
+
+    <!-- 繩紋爐耳（左右環把） -->
+    <g stroke="url(#gold)" stroke-width="5" fill="none" stroke-linecap="round">
+      <path d="M64,146 C48,146 46,164 60,166"/>
+      <path d="M176,146 C192,146 194,164 180,166"/>
+    </g>
+    <g stroke="#8a6528" stroke-width="1.5" fill="none" stroke-linecap="round" opacity="0.6">
+      <path d="M64,146 C48,146 46,164 60,166"/>
+      <path d="M176,146 C192,146 194,164 180,166"/>
+    </g>
+
     <!-- 爐口環（等角頂面） -->
-    <polygon points="118,138 168,158 118,178 68,158" fill="#caa15a"/>
-    <polygon points="118,138 168,158 118,178 68,158" fill="none" stroke="#e8c880" stroke-width="1.5"/>
-    <!-- 爐內灰（暗色開口） -->
-    <polygon points="118,148 150,158 118,168 86,158" fill="#2e2620"/>
-    <!-- 兩側耳把 -->
-    <rect x="58" y="150" width="10" height="8" fill="#9c7332"/>
-    <rect x="58" y="150" width="10" height="3" fill="#c79a4f"/>
-    <rect x="168" y="150" width="10" height="8" fill="#9c7332"/>
-    <rect x="168" y="150" width="10" height="3" fill="#c79a4f"/>
+    <polygon points="120,116 178,140 120,164 62,140" fill="url(#bronzeTop)"/>
+    <polygon points="120,116 178,140 120,164 62,140" fill="none" stroke="#e8c880" stroke-width="2"/>
+    <polygon points="120,122 168,140 120,158 72,140" fill="none" stroke="#7a5620" stroke-width="1.5"/>
+    <!-- 香灰 / 米床 -->
+    <polygon points="120,124 164,140 120,156 76,140" fill="url(#ashBed)"/>
+    <g fill="#8a7a4e" opacity="0.6">
+      <rect x="112" y="136" width="3" height="3"/>
+      <rect x="126" y="140" width="3" height="3"/>
+      <rect x="118" y="144" width="3" height="3"/>
+      <rect x="104" y="139" width="3" height="3"/>
+      <rect x="134" y="137" width="3" height="3"/>
+    </g>
   </g>
 
-  <!-- ========================= 右側 · 功德箱 ========================= -->
+  <!-- ============================================================
+       右側 · CODE MERIT 硃砂紅木功德箱
+       ============================================================ -->
   <g>
     <!-- 功德飄字（+1 Merit / -1 Bug 交替飄升） -->
-    <g transform="translate(345,120)">
-      <text x="0" y="0" text-anchor="middle" class="pix float" font-size="12" fill="#55e06a">+1 Merit</text>
-      <text x="0" y="0" text-anchor="middle" class="pix float f2" font-size="12" fill="#86efac">-1 Bug</text>
+    <g transform="translate(348,104)">
+      <text x="0" y="0"  text-anchor="middle" class="pix2 float"    font-size="15" fill="#55e06a">+1 Merit</text>
+      <text x="0" y="0"  text-anchor="middle" class="pix2 float f2" font-size="15" fill="#8be69a">-1 Bug</text>
     </g>
 
-    <!-- 立體硃砂紅木箱（等角立方體） -->
-    <!-- 右前面（受光面） -->
-    <polygon points="345,158 385,138 385,188 345,208" fill="#b23325"/>
-    <!-- 左前面（背光面） -->
-    <polygon points="305,138 345,158 345,208 305,188" fill="#8f271d"/>
+    <!-- 立體箱身 -->
+    <!-- 右前面（受光，CODE MERIT） -->
+    <polygon points="330,168 380,144 380,206 330,230" fill="url(#woodR)"/>
+    <!-- 左前面（背光，圓形紋章） -->
+    <polygon points="280,144 330,168 330,230 280,206" fill="url(#woodL)"/>
     <!-- 頂面 -->
-    <polygon points="345,118 385,138 345,158 305,138" fill="#d24a3a"/>
-    <!-- 頂面金邊 + 投錢口 -->
-    <polygon points="345,118 385,138 345,158 305,138" fill="none" stroke="#ffcf33" stroke-width="1.5"/>
-    <polygon points="345,130 361,138 345,146 329,138" fill="#2a0f0b"/>
-    <!-- 稜線金邊 -->
-    <line x1="345" y1="158" x2="345" y2="208" stroke="#ffcf33" stroke-width="1.5" opacity="0.8"/>
-    <!-- 正面「功德箱」黃色像素字（沿右前面直排） -->
-    <g fill="#ffcf33" class="pix2" font-size="13" text-anchor="middle">
-      <text x="365" y="166">功</text>
-      <text x="365" y="181">德</text>
-      <text x="365" y="196">箱</text>
+    <polygon points="330,120 380,144 330,168 280,144" fill="url(#woodTop)"/>
+
+    <!-- 木紋橫板線 -->
+    <g stroke="#7c1e14" stroke-width="1" opacity="0.55">
+      <line x1="330" y1="182" x2="380" y2="158"/>
+      <line x1="330" y1="196" x2="380" y2="172"/>
+      <line x1="330" y1="210" x2="380" y2="186"/>
     </g>
-    <!-- 箱面鉚釘裝飾 -->
-    <rect x="312" y="150" width="3" height="3" fill="#ffcf33" opacity="0.7"/>
-    <rect x="312" y="180" width="3" height="3" fill="#ffcf33" opacity="0.7"/>
+    <g stroke="#4a0f08" stroke-width="1" opacity="0.5">
+      <line x1="280" y1="158" x2="330" y2="182"/>
+      <line x1="280" y1="172" x2="330" y2="196"/>
+      <line x1="280" y1="186" x2="330" y2="210"/>
+    </g>
+
+    <!-- 右前面金框凹版 + CODE MERIT -->
+    <polygon points="340,176 372,160 372,200 340,216" fill="url(#glowPanel)"/>
+    <polygon points="340,176 372,160 372,200 340,216" fill="none" stroke="url(#gold)" stroke-width="2.5"/>
+    <text x="356" y="186" text-anchor="middle" class="pix2" font-size="10" fill="#ffd24d">CODE</text>
+    <text x="356" y="200" text-anchor="middle" class="pix2" font-size="10" fill="#ffd24d">MERIT</text>
+
+    <!-- 左前面 金色圓紋章 -->
+    <circle cx="305" cy="182" r="12" fill="none" stroke="url(#gold)" stroke-width="2.5"/>
+    <circle cx="305" cy="182" r="5"  fill="none" stroke="#d19a1e" stroke-width="2"/>
+    <g stroke="#d19a1e" stroke-width="1.5">
+      <line x1="305" y1="170" x2="305" y2="176"/>
+      <line x1="305" y1="188" x2="305" y2="194"/>
+      <line x1="293" y1="182" x2="299" y2="182"/>
+      <line x1="311" y1="182" x2="317" y2="182"/>
+    </g>
+
+    <!-- 頂面：金框 + 投錢口 -->
+    <polygon points="330,120 380,144 330,168 280,144" fill="none" stroke="url(#gold)" stroke-width="2"/>
+    <polygon points="330,134 352,144 330,154 308,144" fill="#1c0a06"/>
+    <polygon points="330,134 352,144 330,154 308,144" fill="none" stroke="#d19a1e" stroke-width="1.5"/>
+
+    <!-- 金角柱（四個立柱端點） -->
+    <g>
+      <!-- 前中柱 -->
+      <polygon points="330,162 336,165 336,236 330,233" fill="url(#gold)"/>
+      <polygon points="330,162 324,165 324,236 330,233" fill="#c99a1f"/>
+      <polygon points="330,162 336,165 330,168 324,165" fill="#ffe8a0"/>
+      <!-- 左柱 -->
+      <polygon points="280,138 286,141 286,206 280,209" fill="#e8c060"/>
+      <polygon points="280,138 274,141 274,206 280,209" fill="#c99a1f"/>
+      <polygon points="280,138 286,141 280,144 274,141" fill="#ffe8a0"/>
+      <!-- 右柱 -->
+      <polygon points="380,138 386,141 386,206 380,209" fill="#e8c060"/>
+      <polygon points="380,138 374,141 374,206 380,209" fill="#c99a1f"/>
+      <polygon points="380,138 386,141 380,144 374,141" fill="#ffe8a0"/>
+      <!-- 後頂柱（部分可見） -->
+      <polygon points="330,114 336,117 336,124 330,121" fill="#ffe8a0"/>
+      <polygon points="330,114 324,117 324,124 330,121" fill="#e8c060"/>
+    </g>
+
+    <!-- 底座腳 -->
+    <polygon points="286,206 330,230 330,240 286,216" fill="#4a0f08"/>
+    <polygon points="330,230 374,206 374,216 330,240" fill="#5e150c"/>
+    <rect x="284" y="214" width="10" height="8" fill="#3a0b05"/>
+    <rect x="326" y="236" width="10" height="8" fill="#3a0b05"/>
+    <rect x="370" y="214" width="10" height="8" fill="#3a0b05"/>
   </g>
 
   <!-- ========================= 底部題字 ========================= -->
-  <text x="225" y="234" text-anchor="middle" class="pix" font-size="9" fill="#b6a8d8">???? Bug</text>
-  <text x="225" y="246" text-anchor="middle" font-size="8" fill="#6a5c8a">CompileBless · may your build be green · genesis</text>
+  <text x="230" y="252" text-anchor="middle" class="pix" font-size="9" fill="#b6a8d8">???? Bug</text>
 </svg>
