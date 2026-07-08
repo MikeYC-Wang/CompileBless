@@ -1,5 +1,12 @@
 # 🕯️ CompileBless · 賽博點香積功德
 
+<p align="center">
+  <b>繁體中文</b> ·
+  <a href="README.en.md">English</a> ·
+  <a href="README.ja.md">日本語</a> ·
+  <a href="README.ko.md">한국어</a>
+</p>
+
 > 一個 **免後端主機、完全在 GitHub 內循環** 的互動式 README 組件。
 > 信徒（工程師）在 README 點一下連結、送出一個 Issue，GitHub Actions 就會自動幫你點香、累積功德、更新畫面、並由「神明」自動關閉 Issue。願天下 build 常綠、pipeline 常青。
 
