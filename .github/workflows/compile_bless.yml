@@ -19,7 +19,7 @@ permissions:
 jobs:
   bless:
     # 只有標題以「CompileBless: 功德 +1」開頭的 Issue 才辦理
-    if: startsWith(github.event.issue.title, 'CompileBless: 功德 +1')
+    if: "${{ startsWith(github.event.issue.title, 'CompileBless: 功德 +1') }}"
     runs-on: ubuntu-latest
     steps:
       - name: 🛎️ 簽出代碼
@@ -67,7 +67,7 @@ jobs:
             exit 1
           fi
 
-      - name: 🙏 關閉 Issue 並蓋上「status: blessed」神印
+      - name: "🙏 關閉 Issue 並蓋上「status: blessed」神印"
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
