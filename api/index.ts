@@ -124,14 +124,64 @@ const langValue = (input: QueryValue): Lang => {
   return 'zh-TW';
 };
 
+const handlePattern = [
+  '...####....',
+  '..##..##...',
+  '.##....##..',
+  '.##...###..',
+  '###..##....',
+  '###.##.....',
+  '.####......',
+  '..###......',
+  '.##.##.....',
+  '##...##....',
+  '##...###...',
+  '.##.##.....',
+  '..###......'
+];
+
+const legPattern = [
+  '..##..',
+  '.####.',
+  '##..##',
+  '.####.',
+  '.####.',
+  '.#..#.',
+  '##..##',
+  '.####.'
+];
+
 const incenseBurner = () => {
-  const parts: string[] = [];
-  [0, 1, 2].forEach((i) => parts.push(cube({ x: 1.2 + i * 1.8, y: 5.2, z: 0, w: 0.5, d: 0.5, h: 1.1, tone: 'd' }, OX, OY)));
-  parts.push(cube({ x: 0.6, y: 3.9, z: 1.1, w: 5.2, d: 1.8, h: 0.9, tone: 'b' }, OX, OY));
-  parts.push(cube({ x: 1.1, y: 2.8, z: 2, w: 4.3, d: 3.4, h: 1.9, tone: 'd' }, OX, OY));
-  parts.push(cube({ x: 1.7, y: 2.2, z: 4.3, w: 3.1, d: 2.4, h: 1.1, tone: 'b' }, OX, OY));
-  parts.push(`<g transform="translate(122 118)">${mergeRows(['.###.','#...#','#.#.#','#...#','.###.'],0,0,'#f4d45a',4)}</g>`);
-  return parts.join('');
+  const handles = mergeRows(handlePattern, 0, 0, '#8e7a35', 4);
+  const legs = mergeRows(legPattern, 0, 0, '#8b7330', 4);
+  const pattern = mergeRows(['##.##.##.##.##.##.##.##.##','.##.##.##.##.##.##.##.##.'],0,0,'#cfb765',4);
+  return [
+    '<g transform="translate(68 116)">',
+    handles,
+    '</g>',
+    '<g transform="translate(226 116) scale(-1 1) translate(-44 0)">',
+    handles,
+    '</g>',
+    '<polygon class="bt" points="96,143 120,126 178,126 202,143 202,154 96,154"/>',
+    '<polygon fill="#2d2410" points="109,143 128,132 170,132 189,143 182,148 116,148"/>',
+    '<polygon fill="#d7c6a1" points="118,144 132,136 166,136 180,144 175,147 123,147" opacity=".75"/>',
+    '<polygon class="dt" points="100,153 118,147 180,147 198,153 190,167 108,167"/>',
+    '<polygon class="bl" points="104,167 114,157 184,157 194,167 189,195 109,195"/>',
+    '<polygon class="br" points="109,195 189,195 180,210 118,210"/>',
+    '<g transform="translate(98 154)">',
+    pattern,
+    '</g>',
+    '<text x="149" y="193" fill="#e0c96d" font-size="17" font-weight="700" font-family="monospace" text-anchor="middle">招財進寶</text>',
+    '<g transform="translate(114 203)">',
+    legs,
+    '</g>',
+    '<g transform="translate(142 205)">',
+    legs,
+    '</g>',
+    '<g transform="translate(170 203)">',
+    legs,
+    '</g>'
+  ].join('');
 };
 
 const incense = () => {
@@ -145,14 +195,26 @@ const incense = () => {
   return stems + embers + smoke;
 };
 
-const meritBox = (copy: Copy) => `${cube({ x: 0, y: 0, z: 0, w: 5.8, d: 3.6, h: 3.2, tone: 'r' }, BOX_OX, BOX_OY)}<rect x="322" y="118" width="40" height="4" fill="#2d160f" rx="2"/><text x="342" y="156" class="k" text-anchor="middle">${esc(copy.box)}</text>`;
+const meritBox = (copy: Copy) => [
+  '<polygon class="rt" points="292,142 374,142 389,154 306,154"/>',
+  '<polygon class="rr" points="374,142 389,154 389,203 374,194"/>',
+  '<polygon class="rl" points="306,154 389,154 389,203 306,203"/>',
+  '<polygon fill="#792118" points="282,154 306,154 306,203 282,193"/>',
+  '<polygon fill="#d97158" points="306,136 374,136 389,142 292,142"/>',
+  '<rect x="326" y="144" width="34" height="4" fill="#22110d" rx="2"/>',
+  '<rect x="321" y="166" width="51" height="18" fill="#8d2317" stroke="#f1d071" stroke-width="2"/>',
+  `<text x="346" y="179" class="k" text-anchor="middle">${esc(copy.box)}</text>`,
+  '<rect x="294" y="203" width="84" height="6" fill="#6d1a14"/>',
+  '<rect x="300" y="209" width="10" height="10" fill="#4d100d"/>',
+  '<rect x="362" y="209" width="10" height="10" fill="#4d100d"/>'
+].join('');
 
 const floating = (copy: Copy) => `<g class="glow"><text x="332" y="110" class="f a">${esc(copy.merit)}</text><text x="338" y="122" class="f b">${esc(copy.bug)}</text></g>`;
 
 const scene = (meritCount: number, lang: Lang) => {
   const copy = COPY[lang];
   const label = esc(copy.label(meritCount));
-  return `<svg xmlns="http://www.w3.org/2000/svg" width="450" height="250" viewBox="0 0 450 250" aria-label="CompileBless merit counter ${meritCount}"><style>:root{color-scheme:light dark}.bt{fill:#6f8b6d}.bl{fill:#4f6750}.br{fill:#344a35}.dt{fill:#7aa27c}.dl{fill:#5b7d5d}.dr{fill:#3d5d40}.rt{fill:#b63f2d}.rl{fill:#8f2b22}.rr{fill:#6f1b18}.k{fill:#f4d45a;font:700 13px monospace}.t{fill:#55351e;font:700 15px monospace}.u{fill:#8a5b2a;font:700 12px monospace}.f{fill:#76f28d;font:700 11px monospace;opacity:0}.sm{fill:#b7bdc1}.g{filter:drop-shadow(0 0 0 transparent)}.a{animation:ra 3.2s linear infinite}.b{animation:rb 3.2s linear 1.6s infinite}.ember{animation:fl 1.4s ease-in-out infinite}@keyframes fl{50%{opacity:.65}}@keyframes ra{15%{opacity:.72}to{opacity:0;transform:translate(-10px,-34px) scale(.78)}}@keyframes rb{20%{opacity:.68}to{opacity:0;transform:translate(8px,-30px) scale(.74)}}@media (prefers-color-scheme:dark){.t{fill:#ffd88a}.u,.k{fill:#e0bb72}.g{filter:drop-shadow(0 0 4px rgba(120,255,180,.28))}.ember{filter:drop-shadow(0 0 5px rgba(255,163,58,.6))}.sm{fill:#c7d2d9}.bt{fill:#7b9f7d}.bl{fill:#5f7f61}.br{fill:#466048}.rt{fill:#c6523d}.rl{fill:#a33629}.rr{fill:#7d211d}}</style><g class="g" shape-rendering="crispEdges">${incenseBurner()}${incense()}${meritBox(copy)}${floating(copy)}</g><text class="t g" x="225" y="224" text-anchor="middle">${label}</text></svg>`;
+  return `<svg xmlns="http://www.w3.org/2000/svg" width="450" height="250" viewBox="0 0 450 250" aria-label="CompileBless merit counter ${meritCount}"><style>:root{color-scheme:light dark}.bt{fill:#7d6a2c}.bl{fill:#65531f}.br{fill:#463813}.dt{fill:#a28b3d}.dl{fill:#705d23}.dr{fill:#564617}.rt{fill:#b63f2d}.rl{fill:#972c20}.rr{fill:#6f1b18}.k{fill:#f4d45a;font:700 12px monospace}.t{fill:#55351e;font:700 15px monospace}.u{fill:#8a5b2a;font:700 12px monospace}.f{fill:#76f28d;font:700 11px monospace;opacity:0}.sm{fill:#b7bdc1}.g{filter:drop-shadow(0 0 0 transparent)}.a{animation:ra 3.2s linear infinite}.b{animation:rb 3.2s linear 1.6s infinite}.ember{animation:fl 1.4s ease-in-out infinite}@keyframes fl{50%{opacity:.65}}@keyframes ra{15%{opacity:.72}to{opacity:0;transform:translate(-10px,-34px) scale(.78)}}@keyframes rb{20%{opacity:.68}to{opacity:0;transform:translate(8px,-30px) scale(.74)}}@media (prefers-color-scheme:dark){.t{fill:#ffd88a}.u,.k{fill:#e0bb72}.g{filter:drop-shadow(0 0 4px rgba(120,255,180,.28))}.ember{filter:drop-shadow(0 0 5px rgba(255,163,58,.6))}.sm{fill:#c7d2d9}.bt{fill:#907c36}.bl{fill:#766226}.br{fill:#534116}.rt{fill:#c6523d}.rl{fill:#ad3829}.rr{fill:#812320}}</style><g class="g" shape-rendering="crispEdges">${incenseBurner()}${incense()}${meritBox(copy)}${floating(copy)}</g><text class="t g" x="225" y="238" text-anchor="middle">${label}</text></svg>`;
 };
 
 export default function handler(req: RequestLike, res: ResponseLike) {
