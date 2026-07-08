@@ -1,2 +1,11 @@
-node_modules
-.vercel
+# Python
+__pycache__/
+*.py[cod]
+*.tmp
+.venv/
+venv/
+
+# OS / Editor
+.DS_Store
+Thumbs.db
+.vscode/
