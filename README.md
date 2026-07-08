@@ -35,8 +35,9 @@ flowchart LR
 | [`.github/workflows/compile_bless.yml`](.github/workflows/compile_bless.yml) | Issue 觸發的自動化工作流 |
 | [`scripts/update_merit.py`](scripts/update_merit.py) | 讀寫功德、渲染 SVG 的核心腳本 |
 | [`data/merit.json`](data/merit.json) | 功德累積數據庫 |
-| [`assets/template.svg`](assets/template.svg) | 純代碼 3D 像素香爐 / 功德箱動態模板 |
-| `compile_bless.svg` | 由腳本自動產生、給 README 顯示的成品 |
+| [`assets/base.png`](assets/base.png) | 體素香爐 / CODE MERIT 箱底圖（會被 base64 內嵌進 SVG） |
+| [`assets/template.svg`](assets/template.svg) | 混合模板：內嵌底圖 + 疊加線香/煙霧/飄字/看板動畫 |
+| `compile_bless.svg` | 由腳本自動產生、給 README 顯示的成品（自帶底圖，單檔可用） |
 
 ---
 
@@ -108,7 +109,7 @@ HTML 置中按鈕：
 
 ## 🚀 安裝到你自己的專案
 
-1. 複製 `.github/`、`scripts/`、`data/`、`assets/` 四個資料夾到你的 Repo。
+1. 複製 `.github/`、`scripts/`、`data/`、`assets/` 四個資料夾到你的 Repo（`assets/base.png` 是底圖，可換成你自己的體素圖）。
 2. 執行一次 `python scripts/update_merit.py` 產生初始 `compile_bless.svg`（或直接沿用本專案的）。
 3. 在 `Settings → Actions → General → Workflow permissions` 選擇 **Read and write permissions**。
 4. 把上面的超連結與 `<img src="./compile_bless.svg">` 貼進你的 README，並把 `MikeYC-Wang/CompileBless` 換成你自己的 `<擁有者>/<專案>`。
@@ -118,7 +119,8 @@ HTML 置中按鈕：
 
 ## 🎨 動態特效說明
 
-- **線香煙霧**：3 條像素煙以 SVG 群組 + CSS `@keyframes` 緩慢上升、左右擺動，透明度隨高度由 1 漸變為 0。
+- **底圖**：`assets/base.png`（體素香爐 + CODE MERIT 箱）由腳本讀取後轉成 `data:` URI 內嵌進 SVG，成品單檔即含圖，GitHub 用 `<img>` 載入也能顯示並播放動畫。
+- **線香煙霧**：3 根線香（暗紅 + 焦黑頂 + 火星閃爍）插在爐口，煙以 SVG 群組 + CSS `@keyframes` 緩慢上升、左右擺動，透明度隨高度由 1 漸變為 0。
 - **功德飄字**：綠色 `+1 Merit` 與 `-1 Bug` 交替往天空飄升淡出（`animation-delay` 錯開）。
 - **火星閃爍**：線香頂端橘色火星以 `ember` 動畫忽明忽暗。
 - **計數看板**：像素字體顯示「今日全球工程師已累積功德：{merit_count}」。

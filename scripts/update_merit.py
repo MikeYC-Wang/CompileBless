@@ -15,6 +15,7 @@
 
 from __future__ import annotations
 
+import base64
 import json
 import os
 import sys
@@ -26,6 +27,7 @@ from pathlib import Path
 ROOT_DIR = Path(__file__).resolve().parent.parent
 DATA_FILE = ROOT_DIR / "data" / "merit.json"
 TEMPLATE_FILE = ROOT_DIR / "assets" / "template.svg"
+BASE_IMAGE_FILE = ROOT_DIR / "assets" / "base.png"
 OUTPUT_FILE = ROOT_DIR / "compile_bless.svg"
 
 DEFAULT_DATA = {
@@ -77,6 +79,16 @@ def atomic_write(path: Path, content: str) -> None:
             os.remove(tmp_name)
 
 
+def base_image_data_uri() -> str:
+    """把底圖 base.png 轉成 data URI；不存在則回傳空字串（動畫仍可疊）。"""
+    if not BASE_IMAGE_FILE.exists():
+        print(f"[warn] 找不到底圖 {BASE_IMAGE_FILE}，SVG 將只有動畫層。")
+        return ""
+    raw = BASE_IMAGE_FILE.read_bytes()
+    b64 = base64.b64encode(raw).decode("ascii")
+    return f"data:image/png;base64,{b64}"
+
+
 def render_svg(merit_count: int, blessed_by: str, blessed_at: str) -> str:
     """讀取模板並填入動態數值，回傳最終 SVG 字串。"""
     if not TEMPLATE_FILE.exists():
@@ -89,6 +101,7 @@ def render_svg(merit_count: int, blessed_by: str, blessed_at: str) -> str:
     blessed_line = f"最新一炷香：{blessed_by}" if blessed_by else "願天下無 Bug"
 
     replacements = {
+        "{base_image}": base_image_data_uri(),
         "{merit_count}": pretty_count,
         "{blessed_by}": blessed_by or "anonymous",
         "{blessed_line}": blessed_line,
